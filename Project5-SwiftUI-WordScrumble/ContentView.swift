@@ -30,6 +30,9 @@ struct ContentView: View {
                     Text($0)
                 }
             }
+            .navigationBarItems(trailing: Button(action: startGame, label: {
+                Image(systemName: "arrow.clockwise").imageScale(.large)
+            }))
         .navigationBarTitle(rootWord)
         .onAppear(perform: startGame)
             .alert(isPresented: $showingError) { () -> Alert in
