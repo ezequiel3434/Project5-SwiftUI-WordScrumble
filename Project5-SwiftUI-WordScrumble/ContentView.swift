@@ -17,6 +17,7 @@ struct ContentView: View {
     @State private var errorTitle = ""
     @State private var errorMessage = ""
     @State private var showingError = false
+    @State private var score = 0
     
     var body: some View {
         NavigationView{
@@ -29,6 +30,7 @@ struct ContentView: View {
                     Image(systemName: "\($0.count).circle")
                     Text($0)
                 }
+                Text("Score: \(score)")
             }
             .navigationBarItems(trailing: Button(action: startGame, label: {
                 Image(systemName: "arrow.clockwise").imageScale(.large)
@@ -62,11 +64,12 @@ struct ContentView: View {
         }
         
         
-        
+        score += 1
         usedWords.insert(answer, at: 0)
         newWord = ""
     }
     func startGame() {
+        score = 0
         if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: ".txt") {
             if let startWords = try? String(contentsOf: startWordsURL) {
                 let allWords = startWords.components(separatedBy: "\n")
